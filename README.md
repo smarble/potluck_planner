@@ -1,17 +1,17 @@
 Potluck Planner
 
-An application that collects user and dish information, and can be 
-used to organize potluck events.
+An application that collects user, dish, and event information to organize potluck events.
+
 
 Features
 
-- users can create a password
 - view users
+- users can create a password
 - search for users
 - search for potluck events
-- view dishes associated with a particular user
-- view users associated with a specific potluck
-- create a list of dishes and users for specific potluck
+- view dishes associated with a particular user or event
+- view users associated with a specific event
+
 
 Planning
 
@@ -25,4 +25,7 @@ User Flow:
 https://drive.google.com/file/d/1vefygqMJuOhR5ortEGEoLg-lbiDrPHDk/view?usp=sharing
 
 
-Planning
+Sprint 1: Project plan and configuration
+Sprint 2: MVP (minimum viable product)
+Sprint 3: Design
+Sprint 4: Final
