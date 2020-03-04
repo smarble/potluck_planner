@@ -29,3 +29,5 @@ Sprint 1: Project plan and configuration
 Sprint 2: MVP (minimum viable product)
 Sprint 3: Design
 Sprint 4: Final
+
+
