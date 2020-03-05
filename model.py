@@ -43,7 +43,7 @@ class Potluck(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<User user_id={self.potluck_id} date={self.date} address={self.address}>"
+        return f"<Potluck user_id={self.potluck_id} date={self.date} address={self.address}>"
 
 
 class Dish(db.Model):
@@ -58,7 +58,7 @@ class Dish(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<User dish_id={self.dish_id} dish_name={self.dish_name}>"
+        return f"<Dish dish_id={self.dish_id} dish_name={self.dish_name}>"
 
 
 class UserDish(db.Model):
@@ -75,64 +75,40 @@ class UserDish(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<User user_dish_id={self.user_dish_id} user_id={self.user_id} dish_id={self.dish_id}>"
+        return f"<UserDish user_dish_id={self.user_dish_id} user_id={self.user_id} dish_id={self.dish_id}>"
 
 
+class UserPotluck(db.Model):
+    """Users dishes table in potluck_planner database."""
 
+    __tablename__ = "users_potlucks"
 
+    user_potluck_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    potluck_id = db.Column(db.Integer, db.ForeignKey('potlucks.potluck_id'))
+    
 
-
-
-
-
-
-
-
-
-
-
-
-class Movie(db.Model):
-    """Movie on ratings website."""
-
-    __tablename__ = "movies"
-
-    movie_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(100))
-    released_at = db.Column(db.DateTime)
-    imdb_url = db.Column(db.String(200))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<Movie movie_id={self.movie_id} title={self.title}>"
+        return f"<UserPotluck user_potluck_id={self.user_potluck_id} user_id={self.user_id} potluck_id={self.potluck_id}>"
 
+class PotluckDishes(db.Model):
+    """Users dishes table in potluck_planner database."""
 
-class Rating(db.Model):
-    """Rating of a movie by a user."""
+    __tablename__ = "potlucks_dishes"
 
-    __tablename__ = "ratings"
+    potluck_dish_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    potluck_id = db.Column(db.Integer, db.ForeignKey('potlucks.potluck_id'))
+    dish_id = db.Column(db.Integer, db.ForeignKey('dishes.dish_id'))
 
-    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    movie_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'), index=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), index=True)
-    score = db.Column(db.Integer)
-
-    # Define relationship to user
-    user = db.relationship("User",
-                           backref=db.backref("ratings", order_by=rating_id))
-
-    # Define relationship to movie
-    movie = db.relationship("Movie",
-                            backref=db.backref("ratings", order_by=rating_id))
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"""<Rating rating_id={self.rating_id} 
-                    movie_id={self.movie_id} 
-                    user_id={self.user_id} 
-                    score={self.score}>"""
+        return f"<PotluckDishes potluck_dish_id={self.potluck_dish_id} potluck_id={self.potluck_id} dish_id={self.dish_id}>"
+
 
 ##############################################################################
 # Helper functions
@@ -141,7 +117,8 @@ def connect_to_db(app):
     """Connect the database to our Flask app."""
 
     # Configure to use our PostgreSQL database
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///ratings'
+    # database name goes here
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///potluck_planner'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
