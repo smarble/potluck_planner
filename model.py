@@ -20,11 +20,11 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String(30), nullable=False)
-    lname = db.Column(db.String(30), nullable=True)
+    fname = db.Column(db.String(100), nullable=False)
+    lname = db.Column(db.String(100), nullable=True)
     phone = db.Column(db.Integer, nullable=True)
-    email = db.Column(db.String(64), nullable=True)
-    password = db.Column(db.String(64), nullable=True)
+    email = db.Column(db.String(100), nullable=True)
+    password = db.Column(db.String(100), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -38,13 +38,14 @@ class Potluck(db.Model):
     __tablename__ = "potlucks"
 
     potluck_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    date = db.Column(db.DateTime, nullable=False)
-    address = db.Column(db.String(100), nullable=False)
+    potluck_name = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.DateTime, nullable=True)
+    address = db.Column(db.String(200), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<Potluck user_id={self.potluck_id} date={self.date} address={self.address}>"
+        return f"<Potluck potluck_id={self.potluck_id} potluck_name={self.potluck_name]}>"
 
 
 class Dish(db.Model):
@@ -55,11 +56,28 @@ class Dish(db.Model):
     dish_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     dish_name = db.Column(db.String(200), nullable=False)
     category = db.Column(db.String(100), nullable=True)
+    type_name = db.Column(db.String(100), db.ForeignKey('types.type_id'))
+    servings = db.Column(db.Integer, nullable=True)
+
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
         return f"<Dish dish_id={self.dish_id} dish_name={self.dish_name}>"
+
+
+class Type(db.Model):
+    """Type table in potluck_planner database."""
+
+    __tablename__ = "types"
+
+    type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    type_name = db.Column(db.String(999), nullable=False)
+
+    def __repr__(self):
+        """Provide helpful representation when printed."""
+
+        return f"<Type type_id={self.type_id} type_name={self.type_name}>"        
 
 
 class UserDish(db.Model):
