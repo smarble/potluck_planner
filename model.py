@@ -15,16 +15,16 @@ db = SQLAlchemy()
 # Model definitions
 
 class User(db.Model):
-    """User table in potluck_planner database."""
+    """users table in potluck_planner database."""
 
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String(100), nullable=False)
-    lname = db.Column(db.String(100), nullable=True)
+    fname = db.Column(db.String(), nullable=False)
+    lname = db.Column(db.String(), nullable=True)
     phone = db.Column(db.Integer, nullable=True)
-    email = db.Column(db.String(100), nullable=True)
-    password = db.Column(db.String(100), nullable=True)
+    email = db.Column(db.String(), nullable=True)
+    password = db.Column(db.String(), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -33,31 +33,33 @@ class User(db.Model):
 
 
 class Potluck(db.Model):
-    """Potluck table in potluck_planner database."""
+    """potlucks table in potluck_planner database."""
 
     __tablename__ = "potlucks"
 
     potluck_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    potluck_name = db.Column(db.String(100), nullable=False)
+    potluck_name = db.Column(db.String(), nullable=False)
     date = db.Column(db.DateTime, nullable=True)
-    address = db.Column(db.String(200), nullable=True)
+    address = db.Column(db.String(), nullable=True)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<Potluck potluck_id={self.potluck_id} potluck_name={self.potluck_name]}>"
+        return f"<Potluck potluck_id={self.potluck_id} potluck_name={self.potluck_name}>"
 
 
 class Dish(db.Model):
-    """Dish table in potluck_planner database."""
+    """dishes table in potluck_planner database."""
 
     __tablename__ = "dishes"
 
     dish_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    dish_name = db.Column(db.String(200), nullable=False)
-    category = db.Column(db.String(100), nullable=True)
-    type_name = db.Column(db.String(100), db.ForeignKey('types.type_id'))
+    dish_name = db.Column(db.String(), nullable=False)
+    category = db.Column(db.String(), nullable=True)
+    type_id = db.Column(db.Integer, db.ForeignKey('types.type_id'))
     servings = db.Column(db.Integer, nullable=True)
+
+    something = db.relationship("Type", backref="dishes")
 
 
     def __repr__(self):
@@ -67,12 +69,12 @@ class Dish(db.Model):
 
 
 class Type(db.Model):
-    """Type table in potluck_planner database."""
+    """types table in potluck_planner database."""
 
     __tablename__ = "types"
 
     type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    type_name = db.Column(db.String(999), nullable=False)
+    type_name = db.Column(db.String(), nullable=False)
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -81,7 +83,7 @@ class Type(db.Model):
 
 
 class UserDish(db.Model):
-    """Users dishes table in potluck_planner database."""
+    """users_dishes table in potluck_planner database."""
 
     __tablename__ = "users_dishes"
 
@@ -96,7 +98,7 @@ class UserDish(db.Model):
 
 
 class UserPotluck(db.Model):
-    """Users dishes table in potluck_planner database."""
+    """Users_potlucks table in potluck_planner database."""
 
     __tablename__ = "users_potlucks"
 
@@ -111,7 +113,7 @@ class UserPotluck(db.Model):
 
 
 class PotluckDishes(db.Model):
-    """Users dishes table in potluck_planner database."""
+    """potlucks_dishes table in potluck_planner database."""
 
     __tablename__ = "potlucks_dishes"
 
