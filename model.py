@@ -142,7 +142,8 @@ def connect_to_db(app):
     app.config['SQLALCHEMY_ECHO'] = True
     db.app = app
     db.init_app(app)
-
+    db.create_all()
+    #db.drop()
 
 if __name__ == "__main__":
     # As a convenience, if we run this module interactively, it will leave
@@ -152,5 +153,6 @@ if __name__ == "__main__":
     from server import app
 
     connect_to_db(app)
+    
     print("Connected to DB.")
 
