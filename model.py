@@ -22,7 +22,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     fname = db.Column(db.String(), nullable=False)
     lname = db.Column(db.String(), nullable=True)
-    phone = db.Column(db.Integer, nullable=True)
+    phone = db.Column(db.String(), nullable=True)
     email = db.Column(db.String(), nullable=True)
     password = db.Column(db.String(), nullable=True)
 
@@ -112,7 +112,7 @@ class UserPotluck(db.Model):
         return f"<UserPotluck user_potluck_id={self.user_potluck_id} user_id={self.user_id} potluck_id={self.potluck_id}>"
 
 
-class PotluckDishes(db.Model):
+class PotluckDish(db.Model):
     """potlucks_dishes table in potluck_planner database."""
 
     __tablename__ = "potlucks_dishes"
@@ -125,7 +125,7 @@ class PotluckDishes(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return f"<PotluckDishes potluck_dish_id={self.potluck_dish_id} potluck_id={self.potluck_id} dish_id={self.dish_id}>"
+        return f"<PotluckDish potluck_dish_id={self.potluck_dish_id} potluck_id={self.potluck_id} dish_id={self.dish_id}>"
 
 
 
@@ -153,6 +153,5 @@ if __name__ == "__main__":
     from server import app
 
     connect_to_db(app)
-    
     print("Connected to DB.")
 
