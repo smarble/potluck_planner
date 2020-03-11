@@ -12,10 +12,10 @@ def load_users():
 
     print("Users")
 
-    paul = User(fname="Paul",
-                lname="Reubens",
+    lisa = User(fname="Lisa",
+                lname="Kudrow",
                 phone = 5555555,
-                email = "paul@gmail.com",
+                email = "lisa@gmail.com",
                 password = "1",
                 )
 
@@ -68,7 +68,7 @@ def load_users():
                 )                                       
 
     # We need to add to the session or it won't ever be stored
-    db.session.add_all([paul, serena, prince, michael, grace, ricardo, pauly, bootsy])
+    db.session.add_all([lisa, serena, prince, michael, grace, ricardo, pauly, bootsy])
 
 
     # Once we're done, we should commit our work
@@ -78,25 +78,21 @@ def load_users():
 def load_potlucks():
     """Load potlucks into potlucks table."""
 
-    print("Users")
+    print("Potlucks")
 
-    potluck1 = User(fname="Paul",
-                lname="Reubens",
-                phone = 5555555,
-                email = "paul@gmail.com",
-                password = "1",
+    potluck1 = Potluck(potluck_name="Bootsy's Cosmic Cacophony Bash",
+                # date= datetime(2020, 6, 5, 10, 20, 10, 10),
+                address = "5678 Dark Matter Ln. Richmond Va, 88765",
                 )
 
-    potluck2 = User(fname="Serena",
-                lname="Williams",
-                phone = 5555555,
-                email = "serena@gmail.com",
-                password = "2",
+    potluck2 = Potluck(potluck_name="Serena's Summertime Soiree",
+                # date= datetime(2020, 4, 11, 10, 20, 10, 10),
+                address = "9422 Hard Green Ct. Pheonix AZ, 22098",
                 )
                                 
 
     # We need to add to the session or it won't ever be stored
-    db.session.add_all([paul, serena, prince, michael, grace, ricardo, pauly, bootsy])
+    db.session.add_all([potluck1, potluck2])
 
 
     # Once we're done, we should commit our work
@@ -123,7 +119,9 @@ if __name__ == "__main__":
     connect_to_db(app)
     db.create_all()
    
+    # call your functions above
     load_users()
+    load_potlucks()
     
 
 
