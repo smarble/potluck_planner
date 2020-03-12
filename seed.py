@@ -99,6 +99,72 @@ def load_potlucks():
     db.session.commit()
 
 
+def load_dishes():
+    """Load potlucks into potlucks table."""
+
+    print("Dishes")
+
+    dish1 = Dish(dish_name="Green Veggie Buddah Bowl",
+                servings=5,
+                )
+
+    dish2 = Dish(dish_name="Bananna Pancakes",
+                servings=6,
+                )
+
+    dish3 = Dish(dish_name="Mojito Salad",
+                servings=4,
+                )
+
+    dish4 = Dish(dish_name="Horchata",
+                servings=8,
+                )
+
+    dish5 = Dish(dish_name="Lamb Chops with Mint",
+                servings=5,
+                )
+
+    dish6 = Dish(dish_name="Caprese Salad Skewers",
+                servings=6,
+                )
+
+    dish7 = Dish(dish_name="Grilled Peaches",
+                servings=4,
+                )
+
+    dish8 = Dish(dish_name="Sangria",
+                servings=8,
+                )                           
+                                
+
+    # We need to add to the session or it won't ever be stored
+    db.session.add_all([dish1, dish2, dish3, dish4, dish5, dish6, dish7, dish8])
+
+
+    # Once we're done, we should commit our work
+    db.session.commit()    
+
+
+def load_types():
+    """Load types into types table."""
+
+    print("Types")
+
+    type1 = Type(type_name="Entree") 
+    type2 = Type(type_name="Side")  
+    type3 = Type(type_name="Salad")  
+    type4 = Type(type_name="Drink")
+    type5 = Type(type_name="Appetizer") 
+    type6 = Type(type_name="Dessert")                       
+                                
+
+    # We need to add to the session or it won't ever be stored
+    db.session.add_all([type1, type2, type3, type4, type5, type6])
+
+
+    # Once we're done, we should commit our work
+    db.session.commit() 
+
 
 def set_val_user_id():
     """Set value for the next user_id after seeding database"""
@@ -122,6 +188,8 @@ if __name__ == "__main__":
     # call your functions above
     load_users()
     load_potlucks()
+    load_dishes()
+    load_types()
     
 
 

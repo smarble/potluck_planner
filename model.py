@@ -55,7 +55,6 @@ class Dish(db.Model):
 
     dish_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     dish_name = db.Column(db.String(), nullable=False)
-    category = db.Column(db.String(), nullable=True)
     type_id = db.Column(db.Integer, db.ForeignKey('types.type_id'))
     servings = db.Column(db.Integer, nullable=True)
 
