@@ -1,5 +1,5 @@
 """Models and database functions for Potluck Planner."""
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, Model
 # not using correlation?
 # import correlation
 from collections import defaultdict
@@ -7,7 +7,7 @@ from collections import defaultdict
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
 # object, where we do most of our interactions (like committing, etc.)
-
+SQLALCHEMY_DATBASE_URI = "postgresql:///potluck_planner"
 db = SQLAlchemy()
 
 

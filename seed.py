@@ -5,7 +5,6 @@ from sqlalchemy import func
 
 from model import User, Potluck, Dish, Type, UserDish, UserPotluck, PotluckDish, connect_to_db, db
 from server import app
-from server import app
 
 
 def load_users():
