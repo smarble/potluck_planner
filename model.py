@@ -7,7 +7,6 @@ from collections import defaultdict
 # This is the connection to the PostgreSQL database; we're getting this through
 # the Flask-SQLAlchemy helper library. On this, we can find the `session`
 # object, where we do most of our interactions (like committing, etc.)
-SQLALCHEMY_DATBASE_URI = "postgresql:///potluck_planner"
 db = SQLAlchemy()
 
 
@@ -26,6 +25,10 @@ class User(db.Model):
     email = db.Column(db.String(), nullable=True)
     password = db.Column(db.String(), nullable=True)
 
+    potlucks = db.relationship('Potluck', backref='users', secondary="users_potlucks")
+    dishes = db.relationship('Dish', backref='users', secondary="users_dishes")
+    # Example of many to many. dishes = db.relationship('Dish', backref='user', secondary = 'middle table name')
+    
     def __repr__(self):
         """Provide helpful representation when printed."""
 
@@ -41,6 +44,8 @@ class Potluck(db.Model):
     potluck_name = db.Column(db.String(), nullable=False)
     date = db.Column(db.DateTime, nullable=True)
     address = db.Column(db.String(), nullable=True)
+
+    dishes = db.relationship('Dish', backref='potlucks', secondary = "potlucks_dishes")
 
     def __repr__(self):
         """Provide helpful representation when printed."""
@@ -58,7 +63,8 @@ class Dish(db.Model):
     type_id = db.Column(db.Integer, db.ForeignKey('types.type_id'))
     servings = db.Column(db.Integer, nullable=True)
 
-    something = db.relationship("Type", backref="dishes")
+    types = db.relationship('Type', backref='dishes')
+
 
 
     def __repr__(self):

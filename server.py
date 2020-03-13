@@ -50,12 +50,10 @@ def greet_person():
     db.session.add(new_user)
     db.session.commit()
 
-    compliment = choice(AWESOMENESS)
 
     return render_template("compliment.html",
                            personFname=userFname,
-                           personLname=userLname,
-                           compliment=compliment)
+                           personLname=userLname)
 
 
 @app.route('/game')
@@ -64,8 +62,12 @@ def show_madlib_form():
 
     play_game = request.args.get("play")
 
+    dish1 = Dish.query.filter_by(dish_name=dish_name).all()
+    
+
     if play_game == "yes":
-        return render_template("game.html")
+        dish1 = Dish.query.filter(Dish.potlucks == potluck).all()
+        return render_template("game.html",dish1=dish1)
     else:
         return render_template("goodbye.html")
 
