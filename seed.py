@@ -5,6 +5,7 @@ from sqlalchemy import func
 
 from model import User, Potluck, Dish, Type, UserDish, UserPotluck, PotluckDish, connect_to_db, db
 from server import app
+from server import app
 
 
 def load_users():
@@ -181,7 +182,6 @@ def set_val_user_id():
 
 if __name__ == "__main__":
     from flask import Flask
-    app = Flask(__name__)
     connect_to_db(app)
     db.create_all()
    
