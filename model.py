@@ -26,8 +26,9 @@ class User(db.Model):
     password = db.Column(db.String(), nullable=True)
 
     potlucks = db.relationship('Potluck', backref='users', secondary="users_potlucks")
+    # Example of a many to many relationship. dishes = db.relationship('Dish', backref='user', secondary = 'middle table name')
     dishes = db.relationship('Dish', backref='users', secondary="users_dishes")
-    # Example of many to many. dishes = db.relationship('Dish', backref='user', secondary = 'middle table name')
+   
     
     def __repr__(self):
         """Provide helpful representation when printed."""

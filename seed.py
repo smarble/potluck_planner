@@ -10,7 +10,7 @@ from server import app
 def load_users():
     """Load users into users table."""
 
-    print("Users")
+    print("users")
 
     lisa = User(fname="Lisa",
                 lname="Kudrow",
@@ -78,7 +78,7 @@ def load_users():
 def load_potlucks():
     """Load potlucks into potlucks table."""
 
-    print("Potlucks")
+    print("potlucks")
 
     potluck1 = Potluck(potluck_name="Bootsy's Cosmic Cacophony Bash",
                 # date= datetime(2020, 6, 5, 10, 20, 10, 10),
@@ -102,7 +102,7 @@ def load_potlucks():
 def load_dishes():
     """Load potlucks into potlucks table."""
 
-    print("Dishes")
+    print("dishes")
 
     dish1 = Dish(dish_name="Green Veggie Buddah Bowl",
                 servings=5,
@@ -148,7 +148,7 @@ def load_dishes():
 def load_types():
     """Load types into types table."""
 
-    print("Types")
+    print("types")
 
     type1 = Type(type_name="Entree") 
     type2 = Type(type_name="Side")  
@@ -165,6 +165,27 @@ def load_types():
     # Once we're done, we should commit our work
     db.session.commit() 
 
+
+def load_potlucks_dishes():
+    """Load types into potlucks_dishes table."""
+
+    print("potlucks_dishes")
+
+    potluckDish1 = PotluckDish(dish_id=1, potluck_id=1)
+    potluckDish2 = PotluckDish(dish_id=2, potluck_id=1) 
+    potluckDish3 = PotluckDish(dish_id=3, potluck_id=1)
+    #4 was skipped, you can add later
+    potluckDish5 = PotluckDish(dish_id=5, potluck_id=2)
+    potluckDish6 = PotluckDish(dish_id=6, potluck_id=2)
+    potluckDish7 = PotluckDish(dish_id=7, potluck_id=2)                      
+                                
+
+    # We need to add to the session or it won't ever be stored
+    db.session.add_all([potluckDish1, potluckDish2, potluckDish3, potluckDish5, potluckDish6, potluckDish7])
+
+
+    # Once we're done, we should commit our work
+    db.session.commit() 
 
 def set_val_user_id():
     """Set value for the next user_id after seeding database"""
@@ -189,6 +210,7 @@ if __name__ == "__main__":
     load_potlucks()
     load_dishes()
     load_types()
+    load_potlucks_dishes()
     
 
 
