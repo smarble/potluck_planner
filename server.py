@@ -36,7 +36,7 @@ def start_here():
 def say_hello():
     """Say hello to user."""
 
-    return render_template("hello.html")
+    return render_template("welcome.html")
 
 
 @app.route('/greet')
