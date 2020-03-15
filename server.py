@@ -1,5 +1,5 @@
 """A madlib game that compliments its users."""
-from model import User, Potluck, Dish, connect_to_db, db
+from model import User, Potluck, Dish, PotluckDish, connect_to_db, db
 from random import choice
 from flask import Flask, render_template, request, session, redirect
 from flask_debugtoolbar import DebugToolbarExtension
@@ -61,15 +61,20 @@ def show_madlib_form():
     """Show form to play madlibs or say goodbye."""
 
     play_game = request.args.get("play")
-
-    dish1 = Dish.query.filter_by(dish_name=dish_name).all()
     
 
     if play_game == "yes":
-        dish1 = Dish.query.filter(Dish.potlucks == potluck).all()
-        return render_template("game.html",dish1=dish1)
+        # potluck1Dishes = PotluckDish.query.filter(PotluckDish.potluck_id == 1).all()
+        potluck1Dishes = Dish.query.filter(Dish.potlucks.any(potluck_id=1)).all()
+        # dish_names = [item.dish_name for item in potluck1Dishes]
+        dish_names = []
+        for item in potluck1Dishes:
+            dish_names.append(item.dish_name)
+
+        return render_template("game.html", potluck1Dishes=potluck1Dishes, dish_names=dish_names)
     else:
-        return render_template("goodbye.html")
+        potluck2Dishes = PotluckDish.query.filter(PotluckDish.potluck_id == 2).all()
+        return render_template("goodbye.html", potluck2Dishes=potluck2Dishes)
 
 
 @app.route('/madlib')
