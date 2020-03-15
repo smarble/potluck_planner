@@ -2,16 +2,16 @@
 <html>
 
   <head>
-    <title>A Compliment</title>
+    <title>Choose your Potluck</title>
   </head>
 
   <body>
 
-    <p>Hi {{ personFname }}! I think you're!</p>
+    <p>Hi {{ personFname }} {{ personLname }}!</p>
 
     <p>Wich potluck would you like to attend?</p>
 
-    <form action="/game">
+    <form action="/choosePotluck">
       <input type="radio" name="play" value="yes">Funky
       <input type="radio" name="play" value="no">Artsy
       <input type="submit">

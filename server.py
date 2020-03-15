@@ -51,12 +51,12 @@ def greet_person():
     db.session.commit()
 
 
-    return render_template("compliment.html",
+    return render_template("choosePotluck.html",
                            personFname=userFname,
                            personLname=userLname)
 
 
-@app.route('/game')
+@app.route('/choosePotluck')
 def show_madlib_form():
     """Show form to play madlibs or say goodbye."""
 
@@ -64,17 +64,22 @@ def show_madlib_form():
     
 
     if play_game == "yes":
-        # potluck1Dishes = PotluckDish.query.filter(PotluckDish.potluck_id == 1).all()
         potluck1Dishes = Dish.query.filter(Dish.potlucks.any(potluck_id=1)).all()
-        # dish_names = [item.dish_name for item in potluck1Dishes]
+        # Same as below, but literal: dish_names = [item.dish_name for item in potluck1Dishes]
         dish_names = []
         for item in potluck1Dishes:
             dish_names.append(item.dish_name)
 
         return render_template("game.html", potluck1Dishes=potluck1Dishes, dish_names=dish_names)
     else:
+        potluck2Dishes = Dish.query.filter(Dish.potlucks.any(potluck_id=2)).all()
+        # Same as below, but literal: dish_names = [item.dish_name for item in potluck1Dishes]
+        dish_names = []
+        for item in potluck2Dishes:
+            dish_names.append(item.dish_name)
+
         potluck2Dishes = PotluckDish.query.filter(PotluckDish.potluck_id == 2).all()
-        return render_template("goodbye.html", potluck2Dishes=potluck2Dishes)
+        return render_template("secondChoice.html", potluck2Dishes=potluck2Dishes, dish_names=dish_names)
 
 
 @app.route('/madlib')
