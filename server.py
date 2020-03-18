@@ -3,7 +3,7 @@ from model import User, Potluck, Dish, PotluckDish, connect_to_db, db
 from random import choice
 from flask import Flask, render_template, request, session, redirect
 from flask_debugtoolbar import DebugToolbarExtension
-from sqlalchemy import update, func
+from sqlalchemy import update, func, distinct
 from jinja2 import StrictUndefined
 
 # "__name__" is a special Python variable for the name of the current module
@@ -64,8 +64,9 @@ def show_madlib_form():
     
 
     if play_game == "yes":
-        #select * from dishes where (potlucks.potluck_id = 1)
-        potluck1Dishes = Dish.query.filter(Dish.potlucks.any(potluck_id=1)).all()
+    
+        #Users associated with potluck #1
+        potluck1Dishes = Dish.query.filter(Potluck.potluck_id==1).all()
 
         # Same as below, but literal: dish_names = [item.dish_name for item in potluck1Dishes]
         dish_names = []

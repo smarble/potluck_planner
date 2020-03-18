@@ -187,6 +187,7 @@ def load_potlucks_dishes():
     # Once we're done, we should commit our work
     db.session.commit() 
 
+
 def set_val_user_id():
     """Set value for the next user_id after seeding database"""
 
@@ -203,6 +204,7 @@ def set_val_user_id():
 if __name__ == "__main__":
     from flask import Flask
     connect_to_db(app)
+    db.drop_all()
     db.create_all()
    
     # call your functions above
