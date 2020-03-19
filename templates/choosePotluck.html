@@ -7,14 +7,25 @@
 
   <body>
 
-    <p>Hi {{ personFname }} {{ personLname }}!</p>
+    <h1>Hi {{ personFname }} {{ personLname }}!</h1>
 
-    <p>Wich potluck would you like to attend?</p>
-
-    <form action="/choosePotluck">
+    <!-- <form action="/choosePotluck">
       <input type="radio" name="play" value="yes">Funky
       <input type="radio" name="play" value="no">Artsy
       <input type="submit">
+    </form> -->
+
+    <h1>Wich potluck would you like to attend?</h1>
+
+    <form action="/choosePotluck">
+      <input type="checkbox" id="checkbox1" name="play" value="1">
+      <label for="checkbox1"> Funky</label><br>
+      <p>Names of atendees</p><br><br>
+      <input type="checkbox" id="checkbox2" name="play" value="2">
+      <label for="checkbox2"> Artsy</label><br>
+      <p>Names of atendees</p><br><br>
+    
+      <input type="submit" value="Submit">
     </form>
 
   </body>

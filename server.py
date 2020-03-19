@@ -57,9 +57,8 @@ def choose_potluck_form():
     play_game = request.args.get("play")
     
 
-    if play_game == "yes":
-    
-        #Users associated with potluck #1
+    if play_game == "1":
+        #dishes associated with potluck #1
         potluck1Dishes = Dish.query.filter(Potluck.potluck_id==1).all()
 
         # Same as below, but literal: dish_names = [item.dish_name for item in potluck1Dishes]
@@ -68,12 +67,8 @@ def choose_potluck_form():
             dish_names.append(item.dish_name)
 
         return render_template("firstChoice.html", potluck1Dishes=potluck1Dishes, dish_names=dish_names)
-    else:
 
-        # potlucks table query get one instance with id #2. 
-        # That instance has an attribute named dishes(defined in your model). 
-        # returns every dish associated with potluck #2 in the potlucks_dishes association table.
-        # potluck2Dishes2 = Potluck.query.get(2).dishes
+    elif play_game == "2":
         
         potluck2Dishes = Dish.query.filter(Dish.potlucks.any(potluck_id=2)).all()
         # Same as below, but literal: dish_names = [item.dish_name for item in potluck1Dishes]
