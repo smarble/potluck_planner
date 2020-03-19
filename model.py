@@ -1,4 +1,4 @@
-"""Models and database functions for Potluck Planner."""
+"""Models and database functions for potluck_planner database."""
 from flask_sqlalchemy import SQLAlchemy, Model
 # not using correlation?
 # import correlation

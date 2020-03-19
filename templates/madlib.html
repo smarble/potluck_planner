@@ -11,3 +11,26 @@ totally {{ adjective }} way.
 
 </body>
 </html>
+
+
+
+
+
+#from server.py
+
+
+@app.route('/madlib')
+def show_madlib():
+    """Show resulting mablib."""
+
+    name = request.args.get("person")
+    color = request.args.get("color")
+    noun = request.args.get("noun")
+    adjective = request.args.get("adjective")
+
+    return render_template("madlib.html",
+                           person=name,
+                           color=color,
+                           noun=noun,
+                           adjective=adjective,
+                           )
