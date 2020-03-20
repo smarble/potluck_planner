@@ -33,6 +33,10 @@ class User(db.Model):
 
         return f"<User user_id={self.user_id} fname={self.fname}>"
 
+    def combine_names(self):
+        return self.fname + " " + self.lname
+
+
 
 class Potluck(db.Model):
     """potlucks table in potluck_planner database."""

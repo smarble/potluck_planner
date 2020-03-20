@@ -57,8 +57,7 @@ def greet_person():
     
     names = []
     for i in potluck1_users:
-        names.append(i.fname)
-        names.append(i.lname)
+        names.append(i.combine_names())
         names.append("...")
 
     # potluck1_users_names = names
