@@ -53,14 +53,16 @@ def greet_person():
     #returns the users attribute of potluck1
     potluck1_users = potluck1.users
 
+    # as a list comprehension: names = [(i.fname + i.lname + "...") for i in potluck1_users]
+    
     names = []
     for i in potluck1_users:
         names.append(i.fname)
-        names.append(", ")
         names.append(i.lname)
+        names.append("...")
 
-    potluck1_users_names = names
-    # potluck1_users_names = "".join(names) + "."
+    # potluck1_users_names = names
+    potluck1_users_names = " ".join(names) + "."
 
     #returns an object with potluck_id#2
     potluck2 = Potluck.query.filter(Potluck.potluck_id=='2').one()
@@ -71,15 +73,16 @@ def greet_person():
     #returns the users attribute of potluck2
     potluck2_users = potluck2.users
     
-    # as a list comprehension: names = [i.fname for i in potluck2_users]
+    # as a list comprehension: names = [(i.fname + " " + i.lname) for i in potluck2_users]
     names = []
     for i in potluck2_users:
         names.append(i.fname)
-        names.append(", ")
         names.append(i.lname)
+        names.append("...")
     
+
     # potluck2_users_names = names
-    potluck2_users_names = "".join(names) + "."
+    potluck2_users_names = " ".join(names) + "."
 
 
 

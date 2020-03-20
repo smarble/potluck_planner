@@ -27,6 +27,7 @@ def load_users():
                 )
 
     prince = User(fname="Prince",
+                lname="Nelson",
                 phone = 5555555,
                 email = "prince@gmail.com",
                 password = "3",
