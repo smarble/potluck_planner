@@ -35,7 +35,7 @@ def say_hello():
 
 @app.route('/greet')
 def greet_person():
-    """Greet user by first and last name."""
+    """Greet user by first and last name. Query database to populate potluck names for choice buttons"""
 
     userFname = request.args.get("fname")
     userLname = request.args.get("lname")
@@ -43,11 +43,58 @@ def greet_person():
     new_user = User(fname=userFname, lname=userLname)
     db.session.add(new_user)
     db.session.commit()
+    
+    #returns an object with potluck_id#1
+    potluck1 = Potluck.query.filter(Potluck.potluck_id=='1').one()
+    #returns the name of potluck #1
+    potluck1_name = potluck1.potluck_name
+    potluck1_address = potluck1.address
+
+    #returns the users attribute of potluck1
+    potluck1_users = potluck1.users
+
+    names = []
+    for i in potluck1_users:
+        names.append(i.fname)
+        names.append(", ")
+        names.append(i.lname)
+
+    potluck1_users_names = names
+    # potluck1_users_names = "".join(names) + "."
+
+    #returns an object with potluck_id#2
+    potluck2 = Potluck.query.filter(Potluck.potluck_id=='2').one()
+    #returns the name of potluck #2
+    potluck2_name = potluck2.potluck_name
+    potluck2_address = potluck2.address
+
+    #returns the users attribute of potluck2
+    potluck2_users = potluck2.users
+    
+    # as a list comprehension: names = [i.fname for i in potluck2_users]
+    names = []
+    for i in potluck2_users:
+        names.append(i.fname)
+        names.append(", ")
+        names.append(i.lname)
+    
+    # potluck2_users_names = names
+    potluck2_users_names = "".join(names) + "."
+
+
+
 
 
     return render_template("choosePotluck.html",
                            personFname=userFname,
-                           personLname=userLname)
+                           personLname=userLname,
+                           potluck1_name = potluck1_name,
+                           potluck2_name = potluck2_name,
+                           potluck1_address = potluck1_address,
+                           potluck2_address = potluck2_address,
+                           potluck1_users_names = potluck1_users_names,
+                           potluck2_users_names = potluck2_users_names
+                           )
 
 
 @app.route('/choosePotluck')
@@ -58,26 +105,41 @@ def choose_potluck_form():
     
 
     if play_game == "1":
-        #dishes associated with potluck #1
-        potluck1Dishes = Dish.query.filter(Potluck.potluck_id==1).all()
+       
+        #returns an object with potluck_id#1
+        potluck1 = Potluck.query.filter(Potluck.potluck_id=='1').one()
 
-        # Same as below, but literal: dish_names = [item.dish_name for item in potluck1Dishes]
-        dish_names = []
-        for item in potluck1Dishes:
-            dish_names.append(item.dish_name)
+        #returns the name of potluck #1
+        potluck1_name = potluck1.potluck_name
 
-        return render_template("firstChoice.html", potluck1Dishes=potluck1Dishes, dish_names=dish_names)
+        #returns a list of objects: dishes associated with potluck1
+        potluck1Dishes = potluck1.dishes
+
+        #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
+        names = []
+        for i in potluck1Dishes:
+           names.append(i.dish_name)
+
+        dish_names = ", ".join(names) + "."
+           
+        return render_template("firstChoice.html", potluck1_name = potluck1_name, potluck1Dishes=potluck1Dishes, dish_names=dish_names)
 
     elif play_game == "2":
         
-        potluck2Dishes = Dish.query.filter(Dish.potlucks.any(potluck_id=2)).all()
-        # Same as below, but literal: dish_names = [item.dish_name for item in potluck1Dishes]
-        dish_names = []
-        for item in potluck2Dishes:
-            dish_names.append(item.dish_name)
+        potluck2 = Potluck.query.filter(Potluck.potluck_id=='2').one()
 
-        potluck2Dishes = PotluckDish.query.filter(PotluckDish.potluck_id == 2).all()
-        return render_template("secondChoice.html", potluck2Dishes=potluck2Dishes, dish_names=dish_names)
+        potluck2_name = potluck2.potluck_name
+
+        potluck2Dishes = potluck2.dishes
+
+        #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
+        names = []
+        for i in potluck2Dishes:
+           names.append(i.dish_name)
+
+        dish_names = ", ".join(names) + "."
+
+        return render_template("secondChoice.html", potluck2_name = potluck2_name, potluck2Dishes=potluck2Dishes, dish_names=dish_names)
 
 
 

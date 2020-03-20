@@ -1,7 +1,5 @@
 """Models and database functions for potluck_planner database."""
 from flask_sqlalchemy import SQLAlchemy, Model
-# not using correlation?
-# import correlation
 from collections import defaultdict
 
 # This is the connection to the PostgreSQL database; we're getting this through

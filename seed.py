@@ -188,6 +188,28 @@ def load_potlucks_dishes():
     db.session.commit() 
 
 
+def load_users_potlucks():
+    """Load users and potlucks into users_potlucks table."""
+
+    print("users_potlucks")
+
+    user_potluck1 = UserPotluck(user_id=1, potluck_id=1)
+    user_potluck2 = UserPotluck(user_id=2, potluck_id=1)
+    user_potluck3 = UserPotluck(user_id=3, potluck_id=1)
+    #4 was skipped, you can add later
+    user_potluck5 = UserPotluck(user_id=5, potluck_id=2)
+    user_potluck6 = UserPotluck(user_id=6, potluck_id=2)
+    user_potluck7 = UserPotluck(user_id=7, potluck_id=2)                     
+                                
+
+    # We need to add to the session or it won't ever be stored
+    db.session.add_all([user_potluck1, user_potluck2, user_potluck3, user_potluck5, user_potluck6, user_potluck7])
+
+
+    # Once we're done, we should commit our work
+    db.session.commit()     
+
+
 def set_val_user_id():
     """Set value for the next user_id after seeding database"""
 
@@ -213,6 +235,7 @@ if __name__ == "__main__":
     load_dishes()
     load_types()
     load_potlucks_dishes()
+    load_users_potlucks()
     
 
 

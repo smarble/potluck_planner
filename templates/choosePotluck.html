@@ -19,11 +19,13 @@
 
     <form action="/choosePotluck">
       <input type="checkbox" id="checkbox1" name="play" value="1">
-      <label for="checkbox1"> Funky</label><br>
-      <p>Names of atendees</p><br><br>
+      <label for="checkbox1">{{ potluck1_name }}</label><br>
+      <p>{{potluck1_address}}</p><br>
+      <p>{{potluck1_users_names}}</p><br><br>
       <input type="checkbox" id="checkbox2" name="play" value="2">
-      <label for="checkbox2"> Artsy</label><br>
-      <p>Names of atendees</p><br><br>
+      <label for="checkbox2">{{ potluck2_name }}</label><br>
+      <p>{{potluck1_address}}</p><br>
+      <p>{{potluck2_users_names}}</p><br><br>
     
       <input type="submit" value="Submit">
     </form>
