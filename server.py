@@ -21,7 +21,7 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def start_here():
-    """Display homepage."""
+    """Home Page not in use."""
 
     return "Hi! This is the home page."
 
@@ -43,59 +43,15 @@ def greet_person():
     new_user = User(fname=userFname, lname=userLname)
     db.session.add(new_user)
     db.session.commit()
+
+    potlucks = Potluck.query.all()
     
-    #returns an object with potluck_id#1
-    potluck1 = Potluck.query.filter(Potluck.potluck_id=='1').one()
-    #returns the name of potluck #1
-    potluck1_name = potluck1.potluck_name
-    potluck1_address = potluck1.address
-
-    #returns the users attribute of potluck1
-    potluck1_users = potluck1.users
-
-    # as a list comprehension: names = [(i.fname + i.lname + "...") for i in potluck1_users]
-    
-    names = []
-    for i in potluck1_users:
-        names.append(i.combine_names())
-        names.append("...")
-
-    # potluck1_users_names = names
-    potluck1_users_names = " ".join(names) + "."
-
-    #returns an object with potluck_id#2
-    potluck2 = Potluck.query.filter(Potluck.potluck_id=='2').one()
-    #returns the name of potluck #2
-    potluck2_name = potluck2.potluck_name
-    potluck2_address = potluck2.address
-
-    #returns the users attribute of potluck2
-    potluck2_users = potluck2.users
-    
-    # as a list comprehension: names = [(i.fname + " " + i.lname) for i in potluck2_users]
-    names = []
-    for i in potluck2_users:
-        names.append(i.fname)
-        names.append(i.lname)
-        names.append("...")
-    
-
-    # potluck2_users_names = names
-    potluck2_users_names = " ".join(names) + "."
-
-
-
 
 
     return render_template("choosePotluck.html",
                            personFname=userFname,
                            personLname=userLname,
-                           potluck1_name = potluck1_name,
-                           potluck2_name = potluck2_name,
-                           potluck1_address = potluck1_address,
-                           potluck2_address = potluck2_address,
-                           potluck1_users_names = potluck1_users_names,
-                           potluck2_users_names = potluck2_users_names
+                           potlucks=potlucks
                            )
 
 
@@ -103,45 +59,47 @@ def greet_person():
 def choose_potluck_form():
     """Have user choose a potluck."""
 
-    play_game = request.args.get("play")
+    potluck_id = request.args.get("potluck")
     
+    potluck = Potluck.query.get(potluck_id)
+    return render_template("firstChoice.html", potluck=potluck)
 
-    if play_game == "1":
+    # if play_game == "1":
        
-        #returns an object with potluck_id#1
-        potluck1 = Potluck.query.filter(Potluck.potluck_id=='1').one()
+    #     #returns an object with potluck_id#1
+    #     potluck1 = Potluck.query.filter(Potluck.potluck_id=='1').one()
 
-        #returns the name of potluck #1
-        potluck1_name = potluck1.potluck_name
+    #     #returns the name of potluck #1
+    #     potluck1_name = potluck1.potluck_name
 
-        #returns a list of objects: dishes associated with potluck1
-        potluck1Dishes = potluck1.dishes
+    #     #returns a list of objects: dishes associated with potluck1
+    #     potluck1Dishes = potluck1.dishes
 
-        #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
-        names = []
-        for i in potluck1Dishes:
-           names.append(i.dish_name)
+    #     #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
+    #     names = []
+    #     for i in potluck1Dishes:
+    #        names.append(i.dish_name)
 
-        dish_names = ", ".join(names) + "."
+    #     dish_names = ", ".join(names) + "."
            
-        return render_template("firstChoice.html", potluck1_name = potluck1_name, potluck1Dishes=potluck1Dishes, dish_names=dish_names)
+    #     return render_template("firstChoice.html", potluck1_name = potluck1_name, potluck1Dishes=potluck1Dishes, dish_names=dish_names)
 
-    elif play_game == "2":
+    # elif play_game == "2":
         
-        potluck2 = Potluck.query.filter(Potluck.potluck_id=='2').one()
+    #     potluck2 = Potluck.query.filter(Potluck.potluck_id=='2').one()
 
-        potluck2_name = potluck2.potluck_name
+    #     potluck2_name = potluck2.potluck_name
 
-        potluck2Dishes = potluck2.dishes
+    #     potluck2Dishes = potluck2.dishes
 
-        #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
-        names = []
-        for i in potluck2Dishes:
-           names.append(i.dish_name)
+    #     #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
+    #     names = []
+    #     for i in potluck2Dishes:
+    #        names.append(i.dish_name)
 
-        dish_names = ", ".join(names) + "."
+    #     dish_names = ", ".join(names) + "."
 
-        return render_template("secondChoice.html", potluck2_name = potluck2_name, potluck2Dishes=potluck2Dishes, dish_names=dish_names)
+    #     return render_template("secondChoice.html", potluck2_name = potluck2_name, potluck2Dishes=potluck2Dishes, dish_names=dish_names)
 
 
 

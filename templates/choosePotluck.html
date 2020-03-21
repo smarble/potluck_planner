@@ -17,18 +17,20 @@
 
     <h1>Wich potluck would you like to attend?</h1>
 
-    <form action="/choosePotluck">
-      <input type="checkbox" id="checkbox1" name="play" value="1">
-      <label for="checkbox1">{{ potluck1_name }}</label><br>
-      <p>{{potluck1_address}}</p><br>
-      <p>{{potluck1_users_names}}</p><br><br>
-      <input type="checkbox" id="checkbox2" name="play" value="2">
-      <label for="checkbox2">{{ potluck2_name }}</label><br>
-      <p>{{potluck1_address}}</p><br>
-      <p>{{potluck2_users_names}}</p><br><br>
-    
-      <input type="submit" value="Submit">
-    </form>
+<!-- the below function is possible because we made a potlucks object in our server and rendered/passed it here -->
+<!-- this function makes a radio button for every potluck in the potlucks object -->
+<form action = "/choosePotluck">
+  {% for potluck in potlucks %}
+    <input type="radio" id="{{ potluck.potluck_id }}" name="potluck" value="{{ potluck.potluck_id }}">
+    <label for="{{ potluck.potluck_id }}">{{ potluck.potluck_name }}</label>
+    <p>{{ potluck.address }}</p>
+      {% for user in potluck.users %}
+        <p>{{ user.combine_names() }}</p>
+      {% endfor %}
+  {% endfor %}
+  <input type="submit" value="Submit">
+</form>
+
 
   </body>
 

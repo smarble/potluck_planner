@@ -4,9 +4,25 @@
   <title>firstChoice</title>
 </head>
 <body>
-<h1>People are bringing these dishes to {{ potluck1_name }}:</h1>
-<p>{{ dish_names }}</p>
-<!-- <p>{{ potluck1Dishes }}</p> -->
+<h1>People are bringing these dishes to {{ potluck.potluck_name }}:</h1>
+
+<ul>
+  {% for dishes in potluck.dishes %}
+  <li>{{ dishes.dish_name }} - {{ dishes.servings }} servings</li>
+
+  {% endfor %}
+</ul>
+
+<table>
+  <tr><td>Dish Name</td> <td>Servings</td> <td>Types</td></tr>
+  {% for dishes in potluck.dishes %}
+  <tr> <td>{{ dishes.dish_name }} </td><td>{{ dishes.servings }}</td><td>{{ dishes.types }} </td></tr>
+
+  {% endfor %}
+
+</table>
+
+
 <br>
 <h1>What dish will you bring?</h1>
 <form action="/madlib">
