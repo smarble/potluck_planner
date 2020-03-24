@@ -1,5 +1,5 @@
 """Functions for potluck_planner."""
-from model import User, Potluck, Dish, PotluckDish, connect_to_db, db
+from model import User, Potluck, Dish, PotluckDish, UserPotluck, connect_to_db, db
 from random import choice
 from flask import Flask, render_template, request, session, redirect
 from flask_debugtoolbar import DebugToolbarExtension
@@ -58,49 +58,57 @@ def greet_person():
 @app.route('/choosePotluck')
 def choose_potluck_form():
     """Have user choose a potluck."""
-
+    #getting the data from the html form from the "name=" attribute
+    #the data from the "name=" attribute is the number of the potluck chosen
     potluck_id = request.args.get("potluck")
-    
+
+    #using the number from the html form to query a specific potluck
     potluck = Potluck.query.get(potluck_id)
-    return render_template("firstChoice.html", potluck=potluck)
 
-    # if play_game == "1":
-       
-    #     #returns an object with potluck_id#1
-    #     potluck1 = Potluck.query.filter(Potluck.potluck_id=='1').one()
+    #make an instance of UserPotluck to add this user to the users_potlucks association table
+    # new_user_potluck = UserPotluck(user_id= , potluck_id=potluck_id)
+    # db.session.add(new_user_potluck)
+    # db.session.commit()
 
-    #     #returns the name of potluck #1
-    #     potluck1_name = potluck1.potluck_name
+    
+    return render_template("choice_made.html", potluck=potluck)
+    
 
-    #     #returns a list of objects: dishes associated with potluck1
-    #     potluck1Dishes = potluck1.dishes
 
-    #     #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
-    #     names = []
-    #     for i in potluck1Dishes:
-    #        names.append(i.dish_name)
+#gets potluck.potluck_id (an int), passed from a form in choice_made.html
+@app.route('/user_brings/<int:potluck_id>')
+def add_dish(potluck_id):
+    """Ask user what dish they will bring."""
 
-    #     dish_names = ", ".join(names) + "."
-           
-    #     return render_template("firstChoice.html", potluck1_name = potluck1_name, potluck1Dishes=potluck1Dishes, dish_names=dish_names)
+    #using potluck_id that was passed into @app.route
+    potluck = Potluck.query.get(potluck_id)
 
-    # elif play_game == "2":
-        
-    #     potluck2 = Potluck.query.filter(Potluck.potluck_id=='2').one()
+    dish_name = request.args.get("dish")
+    dish_servings = request.args.get("servings")
+    type_id = request.args.get("type")
 
-    #     potluck2_name = potluck2.potluck_name
+    #use data from html form to make a new Dish instance, add and commit it
+    new_dish = Dish(dish_name=dish_name, servings=dish_servings, type_id=type_id)
+    db.session.add(new_dish)
+    db.session.commit()
 
-    #     potluck2Dishes = potluck2.dishes
+    #make an instance of PotluckDish to add this user to the potlucks_dishes association table
+    # dish_id = Dish.query.filter(Dish.dish_name==dish_name).one()
+    new_dish_id = new_dish.dish_id
+    new_potluck_dish = PotluckDish(potluck_id=potluck_id, dish_id=new_dish_id)
+    db.session.add(new_potluck_dish)
+    db.session.commit()
+    
+    #use table relationships to get the type_name from the new_dish object
+    type_name = new_dish.types.type_name
 
-    #     #as a list comprehension: names = [i.dish_name for i in potluck1Dishes]
-    #     names = []
-    #     for i in potluck2Dishes:
-    #        names.append(i.dish_name)
-
-    #     dish_names = ", ".join(names) + "."
-
-    #     return render_template("secondChoice.html", potluck2_name = potluck2_name, potluck2Dishes=potluck2Dishes, dish_names=dish_names)
-
+    
+    return render_template("user_brings.html",
+                           dish=dish_name,
+                           servings=dish_servings,
+                           type=type_name,
+                           potluck=potluck
+                           )
 
 
 if __name__ == '__main__':

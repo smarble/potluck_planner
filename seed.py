@@ -107,34 +107,42 @@ def load_dishes():
 
     dish1 = Dish(dish_name="Green Veggie Buddah Bowl",
                 servings=5,
-                )
+                # type_id=1,
+)
 
     dish2 = Dish(dish_name="Bananna Pancakes",
                 servings=6,
+                # type_id=6
                 )
 
     dish3 = Dish(dish_name="Mojito Salad",
                 servings=4,
+                # type_id=3
                 )
 
     dish4 = Dish(dish_name="Horchata",
                 servings=8,
+                # type_id=4
                 )
 
     dish5 = Dish(dish_name="Lamb Chops with Mint",
                 servings=5,
+                # type_id=1
                 )
 
     dish6 = Dish(dish_name="Caprese Salad Skewers",
                 servings=6,
+                # type_id=2
                 )
 
     dish7 = Dish(dish_name="Grilled Peaches",
                 servings=4,
+                # type_id=6
                 )
 
     dish8 = Dish(dish_name="Sangria",
                 servings=8,
+                # type_id=4
                 )                           
                                 
 
