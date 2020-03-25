@@ -7,8 +7,7 @@
   </head>
 
   <body>
-
-    <h1>People are bringing these dishes to {{ potluck.potluck_name }}:</h1>
+    
 
     <!-- list with names of dishes -->
     <ul>
@@ -17,15 +16,10 @@
       {% endfor %}
     </ul>
     
-    <!-- table with names of dishes -->
-    <table>
-      <tr><td>Dish Name</td> <td>Servings</td> <td>Types</td></tr>
-      {% for dishes in potluck.dishes %}
-      <tr> <td>{{ dishes.dish_name }} </td><td>{{ dishes.servings }}</td><td>{{ dishes.types.type_name }} </td></tr>
+
+    <h1>See you at {{ potluck.potluck_name }}:</h1>
+    <h1>Address {{ potluck.address }}:</h1>
     
-      {% endfor %}
-    
-    </table>
 
 
   </body>

@@ -106,7 +106,6 @@ def add_dish(potluck_id):
     return render_template("user_brings.html",
                            dish=dish_name,
                            servings=dish_servings,
-                           type=type_name,
                            potluck=potluck
                            )
 
