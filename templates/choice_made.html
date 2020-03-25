@@ -1,49 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <title>Choice Made</title>
-</head>
-<body>
-<h1>People are bringing these dishes to {{ potluck.potluck_name }}:</h1>
 
-<ul>
-  {% for dishes in potluck.dishes %}
-  <li>{{ dishes.dish_name }} - {{ dishes.servings }} servings</li>
+  <head>
+    <title>Choice Made</title>
+  </head>
 
-  {% endfor %}
-</ul>
+  <body>
 
-<!-- <table>
-  <tr><td>Dish Name</td> <td>Servings</td> <td>Types</td></tr>
-  {% for dishes in potluck.dishes %}
-  <tr> <td>{{ dishes.dish_name }} </td><td>{{ dishes.servings }}</td><td>{{ dishes.types }} </td></tr>
+    <section>
 
-  {% endfor %}
+      <h1>People are bringing these dishes to {{ potluck.potluck_name }}:</h1>
+      
+      <ul>
+        {% for dishes in potluck.dishes %}
+        <li>{{ dishes.dish_name }} - {{ dishes.servings }} servings</li>
+      
+        {% endfor %}
+      </ul>
+      
+      <!-- <table>
+        <tr><td>Dish Name</td> <td>Servings</td> <td>Types</td></tr>
+        {% for dishes in potluck.dishes %}
+        <tr> <td>{{ dishes.dish_name }} </td><td>{{ dishes.servings }}</td><td>{{ dishes.types }} </td></tr>
+      
+        {% endfor %}
+      
+      </table> -->
+    
+    </section>
 
-</table> -->
+    <main>
 
+      <h1>What dish will you bring?</h1>
+      <!-- we are also passing into this form data, potuck.potluck_id, so it can be used in another function in the server -->
+      <form action="/user_brings/{{ potluck.potluck_id }}">
+        <p><label> Dish: <input type="text" name="dish"></label></p>
+        <p><label> Servings: <input type="text" name="servings"></label></p>
+      
+        <label for="type">Choose a type:</label>
+        <select id="type" name="type">
+          <option value="1">Entree</option>
+          <option value="2">Side</option>
+          <option value="3">Salad</option>
+          <option value="4">Drink</option>
+          <option value="5">Appetizer</option>
+          <option value="6">Dessert</option>
+        </select>
+        <p><input type="submit"></p>
+      </form>
 
-<br>
-<h1>What dish will you bring?</h1>
-<!-- we are also passing into this form data, potuck.potluck_id, so it can be used in another function in the server -->
-<form action="/user_brings/{{ potluck.potluck_id }}">
-  <p><label> Dish: <input type="text" name="dish"></label></p>
-  <p><label> Servings: <input type="text" name="servings"></label></p>
+    </main>
 
-  <label for="type">Choose a type:</label>
-  <select id="type" name="type">
-    <option value="1">Entree</option>
-    <option value="2">Side</option>
-    <option value="3">Salad</option>
-    <option value="4">Drink</option>
-    <option value="5">Appetizer</option>
-    <option value="6">Dessert</option>
-  </select>
+  </body>
 
-
-
-  <p><input type="submit"></p>
-</form>
-
-</body>
 </html>

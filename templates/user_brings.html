@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -7,20 +6,24 @@
   </head>
 
   <body>
-    
 
-    <!-- list with names of dishes -->
-    <ul>
-      {% for dishes in potluck.dishes %}
-      <li>{{ dishes.dish_name }} - {{ dishes.servings }} servings</li>
-      {% endfor %}
-    </ul>
-    
+    <section>
 
-    <h1>See you at {{ potluck.potluck_name }}:</h1>
-    <h1>Address {{ potluck.address }}:</h1>
+      <!-- list with names of dishes -->
+      <ul>
+        {% for dishes in potluck.dishes %}
+        <li>{{ dishes.dish_name }} - {{ dishes.servings }} servings</li>
+        {% endfor %}
+      </ul>
     
+    </section>
 
+    <main>
+
+      <h1>See you at {{ potluck.potluck_name }}:</h1>
+      <h1>Address {{ potluck.address }}:</h1>
+
+    </main>
 
   </body>
 

@@ -1,16 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <title>Hi There!</title>
-</head>
-<body>
 
-<h1>Hi There!</h1>
+  <head>
+    <title>Choose Potluck</title>
+  </head>
 
-<form action="/greet">
-  <label>What is your name? <input type="text" name="person"></label>
-  <input type="submit">
-</form>
+  <body>
 
-</body>
+    <section>
+
+      <h1>Hi {{ personFname }} {{ personLname }}!</h1>
+      <h1>Wich potluck would you like to attend?</h1>
+    
+    </section>
+
+    <main>
+
+      <!-- the below function is possible because we made a potlucks object in our server and rendered/passed it here -->
+      <!-- this function makes a radio button for every potluck in the potlucks object -->
+      <form action = "/choosePotluck">
+        {% for potluck in potlucks %}
+          <input type="radio" id="{{ potluck.potluck_id }}" name="potluck" value="{{ potluck.potluck_id }}">
+          <label for="{{ potluck.potluck_id }}">{{ potluck.potluck_name }}</label>
+          <p>{{ potluck.address }}</p>
+          {% for user in potluck.users %}
+            <p>{{ user.combine_names() }}</p>
+          {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Submit">
+      </form>
+
+    </main>
+
+  </body>
+
 </html>
