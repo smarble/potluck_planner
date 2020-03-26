@@ -1,6 +1,7 @@
 """Functions for potluck_planner."""
 from model import User, Potluck, Dish, PotluckDish, UserPotluck, connect_to_db, db
-from random import choice
+# from random import choice
+import random
 from flask import Flask, render_template, request, session, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy import update, func, distinct
@@ -18,6 +19,23 @@ app.secret_key = "ABC"
 # This is horrible. Fix this so that, instead, it raises an error.
 app.jinja_env.undefined = StrictUndefined
 
+dish_ideas = [
+    "Lasagna",
+    "Tater-tot Hot Dish",
+    "Paneer Tikka Masala",
+    "Bibimbap",
+    "Deviled Eggs",
+    "Cowboy Caviar Dip",
+    "Lemon Bars",
+    "Creamy Cucumber Dill Salad",
+    "Kalua Pork Sliders",
+    "Pinnapple Slaw",
+    "Tacos",
+    "Antipasto Salad",
+    "Artichoke Dip",
+    "Guacamole and Chips",
+    "Mexican Roasted Corn on the Cob"
+]
 
 @app.route('/')
 def start_here():
@@ -108,6 +126,13 @@ def add_dish(potluck_id):
                            servings=dish_servings,
                            potluck=potluck
                            )
+
+
+@app.route('/dish_ideas')
+def dish_ideas():
+    """Return a single dish idea as a text string (not the whole HTML page!)"""
+
+    return random.choice(dish_ideas)                           
 
 
 if __name__ == '__main__':

@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-  <head>
-    <title>Hi There!</title>
-  </head>
+{% block title %} 
 
-  <body>
+  Hi there! 
 
-    <section>
+{% endblock %}
 
-      <h1>Welcome to Potluck Planner!</h1>
-    
-    </section>
+{% block body %}
 
-    <main>
+<section>
 
-      <form action="/greet">
-        <label>What's your first name? <input type="text" name="fname"></label>
-        <label>What's your last name? <input type="text" name="lname"></label>
-        <input type="submit">
-      </form>
+  <h1>Welcome to Potluck Planner!</h1>
 
-    </main>
+</section>
 
-  </body>
+<main>
 
-</html>
+  <form action="/greet">
+    <label>What's your first name? <input type="text" name="fname"></label>
+    <label>What's your last name? <input type="text" name="lname"></label>
+    <input type="submit">
+  </form>
+
+</main>
+
+{% endblock %}

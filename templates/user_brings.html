@@ -1,30 +1,29 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-  <head>
-    <title>User Brings</title>
-  </head>
+{% block title %} 
 
-  <body>
+  User Brings 
 
-    <section>
+{% endblock %}
 
-      <!-- list with names of dishes -->
-      <ul>
-        {% for dishes in potluck.dishes %}
-        <li>{{ dishes.dish_name }} - {{ dishes.servings }} servings</li>
-        {% endfor %}
-      </ul>
-    
-    </section>
+{% block body %}
 
-    <main>
+<section>
+  <h1>An up to date list of dishes, including yours:</h1>
+  <!-- list with names of dishes -->
+  <ul>
+    {% for dishes in potluck.dishes %}
+    <li>{{ dishes.dish_name }} - {{ dishes.servings }} servings</li>
+    {% endfor %}
+  </ul>
+  
+</section>
 
-      <h1>See you at {{ potluck.potluck_name }}:</h1>
-      <h1>Address {{ potluck.address }}:</h1>
+<main>
 
-    </main>
+  <h1>See you at {{ potluck.potluck_name }}:</h1>
+  <h1>Address {{ potluck.address }}:</h1>
 
-  </body>
+</main>
 
-</html>
+{% endblock %}
