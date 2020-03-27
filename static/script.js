@@ -1,6 +1,7 @@
 "use strict";
 
 function replaceDishIdea(results) {
+    // this below is an ajax call
     $("#ideas_text").html(results);
 }
 

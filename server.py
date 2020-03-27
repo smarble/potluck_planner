@@ -19,7 +19,7 @@ app.secret_key = "ABC"
 # This is horrible. Fix this so that, instead, it raises an error.
 app.jinja_env.undefined = StrictUndefined
 
-dish_ideas = [
+dishes = [
     "Lasagna",
     "Tater-tot Hot Dish",
     "Paneer Tikka Masala",
@@ -34,7 +34,8 @@ dish_ideas = [
     "Antipasto Salad",
     "Artichoke Dip",
     "Guacamole and Chips",
-    "Mexican Roasted Corn on the Cob"
+    "Mexican Roasted Corn on the Cob",
+    "German Chocolate Cake"
 ]
 
 @app.route('/')
@@ -132,7 +133,7 @@ def add_dish(potluck_id):
 def dish_ideas():
     """Return a single dish idea as a text string (not the whole HTML page!)"""
 
-    return random.choice(dish_ideas)                           
+    return random.choice(dishes)                           
 
 
 if __name__ == '__main__':

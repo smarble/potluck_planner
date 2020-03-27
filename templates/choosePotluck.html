@@ -23,7 +23,7 @@
     {% for potluck in potlucks %}
       <input type="radio" id="{{ potluck.potluck_id }}" name="potluck" value="{{ potluck.potluck_id }}">
       <label for="{{ potluck.potluck_id }}">{{ potluck.potluck_name }}</label>
-      <p>{{ potluck.address }}</p>
+      <!-- <p>{{ potluck.address }}</p> -->
       {% for user in potluck.users %}
         <p>{{ user.combine_names() }}</p>
       {% endfor %}
