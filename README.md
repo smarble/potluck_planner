@@ -5,13 +5,11 @@ An application that collects user, dish, and event information to organize potlu
 
 Features
 
-- view users
-- users can create a password
-- search for users
-- search for potluck events
-- view dishes associated with a particular user or event
-- view users associated with a specific event
-
+- users can see who is coming to what potluck
+- users can see what dishes are being brought to each potluck
+- users can see potluck address
+- users can input a dish that they will bring to a specific potluck
+- app will suggest dishes if requested
 
 Planning
 
